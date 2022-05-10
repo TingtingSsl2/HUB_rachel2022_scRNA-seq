@@ -1,0 +1,784 @@
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+Attaching SeuratObject
+Loading required package: Biobase
+Loading required package: BiocGenerics
+Loading required package: parallel
+
+Attaching package: ‘BiocGenerics’
+
+The following objects are masked from ‘package:parallel’:
+
+    clusterApply, clusterApplyLB, clusterCall, clusterEvalQ,
+    clusterExport, clusterMap, parApply, parCapply, parLapply,
+    parLapplyLB, parRapply, parSapply, parSapplyLB
+
+The following objects are masked from ‘package:dplyr’:
+
+    combine, intersect, setdiff, union
+
+The following objects are masked from ‘package:stats’:
+
+    IQR, mad, sd, var, xtabs
+
+The following objects are masked from ‘package:base’:
+
+    anyDuplicated, append, as.data.frame, basename, cbind, colnames,
+    dirname, do.call, duplicated, eval, evalq, Filter, Find, get, grep,
+    grepl, intersect, is.unsorted, lapply, Map, mapply, match, mget,
+    order, paste, pmax, pmax.int, pmin, pmin.int, Position, rank,
+    rbind, Reduce, rownames, sapply, setdiff, sort, table, tapply,
+    union, unique, unsplit, which.max, which.min
+
+Welcome to Bioconductor
+
+    Vignettes contain introductory material; view with
+    'browseVignettes()'. To cite Bioconductor, see
+    'citation("Biobase")', and for packages 'citation("pkgname")'.
+
+Loading required package: SingleCellExperiment
+Loading required package: SummarizedExperiment
+Loading required package: MatrixGenerics
+Loading required package: matrixStats
+
+Attaching package: ‘matrixStats’
+
+The following objects are masked from ‘package:Biobase’:
+
+    anyMissing, rowMedians
+
+The following object is masked from ‘package:dplyr’:
+
+    count
+
+
+Attaching package: ‘MatrixGenerics’
+
+The following objects are masked from ‘package:matrixStats’:
+
+    colAlls, colAnyNAs, colAnys, colAvgsPerRowSet, colCollapse,
+    colCounts, colCummaxs, colCummins, colCumprods, colCumsums,
+    colDiffs, colIQRDiffs, colIQRs, colLogSumExps, colMadDiffs,
+    colMads, colMaxs, colMeans2, colMedians, colMins, colOrderStats,
+    colProds, colQuantiles, colRanges, colRanks, colSdDiffs, colSds,
+    colSums2, colTabulates, colVarDiffs, colVars, colWeightedMads,
+    colWeightedMeans, colWeightedMedians, colWeightedSds,
+    colWeightedVars, rowAlls, rowAnyNAs, rowAnys, rowAvgsPerColSet,
+    rowCollapse, rowCounts, rowCummaxs, rowCummins, rowCumprods,
+    rowCumsums, rowDiffs, rowIQRDiffs, rowIQRs, rowLogSumExps,
+    rowMadDiffs, rowMads, rowMaxs, rowMeans2, rowMedians, rowMins,
+    rowOrderStats, rowProds, rowQuantiles, rowRanges, rowRanks,
+    rowSdDiffs, rowSds, rowSums2, rowTabulates, rowVarDiffs, rowVars,
+    rowWeightedMads, rowWeightedMeans, rowWeightedMedians,
+    rowWeightedSds, rowWeightedVars
+
+The following object is masked from ‘package:Biobase’:
+
+    rowMedians
+
+Loading required package: GenomicRanges
+Loading required package: stats4
+Loading required package: S4Vectors
+
+Attaching package: ‘S4Vectors’
+
+The following objects are masked from ‘package:dplyr’:
+
+    first, rename
+
+The following object is masked from ‘package:base’:
+
+    expand.grid
+
+Loading required package: IRanges
+
+Attaching package: ‘IRanges’
+
+The following objects are masked from ‘package:dplyr’:
+
+    collapse, desc, slice
+
+Loading required package: GenomeInfoDb
+
+Attaching package: ‘SummarizedExperiment’
+
+The following object is masked from ‘package:SeuratObject’:
+
+    Assays
+
+The following object is masked from ‘package:Seurat’:
+
+    Assays
+
+
+Attaching package: ‘monocle3’
+
+The following objects are masked from ‘package:Biobase’:
+
+    exprs, fData, fData<-, pData, pData<-
+
+
+Attaching package: ‘cowplot’
+
+The following object is masked from ‘package:patchwork’:
+
+    align_plots
+
+Read in marker genes
+✔ Reading from "ScRNA-seq_Hassan_2022".
+✔ Range ''MarkerGenesFiltered''.
+Set working dir
+If using Leiden algorithm in FindMarkers
+Warning messages:
+1: In readLines(f, n) : line 1 appears to contain an embedded nul
+2: In readLines(f, n) :
+  incomplete final line found on '/data/bioinformatics/projects/rachel2022/scr/._rachel2022_seurat.Rproj'
+3: In readLines(f, n) : line 1 appears to contain an embedded nul
+4: In readLines(f, n) :
+  incomplete final line found on '/data/bioinformatics/projects/rachel2022/scr/._test.Rproj'
+Step 2: Pre-processing
+Remove ambient RNA by SoupX
+Loading raw count data
+Loading cell-only count data
+Loading extra analysis data where available
+135 genes passed tf-idf cut-off and 85 soup quantile filter.  Taking the top 85.
+Using 602 independent estimates of rho.
+Estimated global rho of 0.03
+Expanding counts from 13 clusters to 10238 cells.
+Loading raw count data
+Loading cell-only count data
+Loading extra analysis data where available
+102 genes passed tf-idf cut-off and 79 soup quantile filter.  Taking the top 79.
+Using 403 independent estimates of rho.
+Estimated global rho of 0.07
+Expanding counts from 13 clusters to 12724 cells.
+Loading raw count data
+Loading cell-only count data
+Loading extra analysis data where available
+76 genes passed tf-idf cut-off and 61 soup quantile filter.  Taking the top 61.
+Using 231 independent estimates of rho.
+Estimated global rho of 0.08
+Expanding counts from 14 clusters to 16007 cells.
+Loading raw count data
+Loading cell-only count data
+Loading extra analysis data where available
+89 genes passed tf-idf cut-off and 74 soup quantile filter.  Taking the top 74.
+Using 407 independent estimates of rho.
+Estimated global rho of 0.05
+Expanding counts from 12 clusters to 14264 cells.
+Loading raw count data
+Loading cell-only count data
+Loading extra analysis data where available
+165 genes passed tf-idf cut-off and 121 soup quantile filter.  Taking the top 100.
+Using 289 independent estimates of rho.
+Estimated global rho of 0.13
+Expanding counts from 16 clusters to 18124 cells.
+Loading raw count data
+Loading cell-only count data
+Loading extra analysis data where available
+142 genes passed tf-idf cut-off and 72 soup quantile filter.  Taking the top 72.
+Using 55 independent estimates of rho.
+Estimated global rho of 0.28
+Expanding counts from 15 clusters to 52190 cells.
+Loading raw count data
+Loading cell-only count data
+Loading extra analysis data where available
+110 genes passed tf-idf cut-off and 84 soup quantile filter.  Taking the top 84.
+Using 158 independent estimates of rho.
+Estimated global rho of 0.12
+Expanding counts from 12 clusters to 15285 cells.
+Loading raw count data
+Loading cell-only count data
+Loading extra analysis data where available
+112 genes passed tf-idf cut-off and 95 soup quantile filter.  Taking the top 95.
+Using 177 independent estimates of rho.
+Estimated global rho of 0.21
+Expanding counts from 16 clusters to 26986 cells.
+Loading raw count data
+Loading cell-only count data
+Loading extra analysis data where available
+247 genes passed tf-idf cut-off and 122 soup quantile filter.  Taking the top 100.
+Using 269 independent estimates of rho.
+Estimated global rho of 0.08
+Expanding counts from 13 clusters to 15754 cells.
+Loading raw count data
+Loading cell-only count data
+Loading extra analysis data where available
+242 genes passed tf-idf cut-off and 75 soup quantile filter.  Taking the top 75.
+Using 144 independent estimates of rho.
+Estimated global rho of 0.17
+Expanding counts from 20 clusters to 31938 cells.
+Loading raw count data
+Loading cell-only count data
+Loading extra analysis data where available
+194 genes passed tf-idf cut-off and 105 soup quantile filter.  Taking the top 100.
+Using 527 independent estimates of rho.
+Estimated global rho of 0.13
+Expanding counts from 18 clusters to 27162 cells.
+Loading raw count data
+Loading cell-only count data
+Loading extra analysis data where available
+108 genes passed tf-idf cut-off and 60 soup quantile filter.  Taking the top 60.
+Using 43 independent estimates of rho.
+Estimated global rho of 0.34
+Estimated contamination is very high (0.34).
+Expanding counts from 15 clusters to 31947 cells.
+Loading raw count data
+Loading cell-only count data
+Loading extra analysis data where available
+147 genes passed tf-idf cut-off and 84 soup quantile filter.  Taking the top 84.
+Using 232 independent estimates of rho.
+Estimated global rho of 0.19
+Expanding counts from 19 clusters to 41125 cells.
+Loading raw count data
+Loading cell-only count data
+Loading extra analysis data where available
+65 genes passed tf-idf cut-off and 35 soup quantile filter.  Taking the top 35.
+Using 23 independent estimates of rho.
+Estimated global rho of 0.13
+Expanding counts from 10 clusters to 6610 cells.
+There were 14 warnings (use warnings() to see them)
+Create Seurat object after SoupX
+Warning: Feature names cannot have underscores ('_'), replacing with dashes ('-')
+Warning: Feature names cannot have underscores ('_'), replacing with dashes ('-')
+Warning: Feature names cannot have underscores ('_'), replacing with dashes ('-')
+Warning: Feature names cannot have underscores ('_'), replacing with dashes ('-')
+Warning: Feature names cannot have underscores ('_'), replacing with dashes ('-')
+Warning: Feature names cannot have underscores ('_'), replacing with dashes ('-')
+Warning: Feature names cannot have underscores ('_'), replacing with dashes ('-')
+Warning: Feature names cannot have underscores ('_'), replacing with dashes ('-')
+Warning: Feature names cannot have underscores ('_'), replacing with dashes ('-')
+Warning: Feature names cannot have underscores ('_'), replacing with dashes ('-')
+Warning: Feature names cannot have underscores ('_'), replacing with dashes ('-')
+Warning: Feature names cannot have underscores ('_'), replacing with dashes ('-')
+Warning: Feature names cannot have underscores ('_'), replacing with dashes ('-')
+Warning: Feature names cannot have underscores ('_'), replacing with dashes ('-')
+Remove raw data to save memory
+Add percent.mt and percent.rb to cell level metadata
+Rename nCount_RNA and nFeature_RNA
+Read in doublet scores
+Read 10238 items
+Read 10238 items
+Read 12724 items
+Read 12724 items
+Read 16007 items
+Read 16007 items
+Read 14264 items
+Read 14264 items
+Read 18124 items
+Read 18124 items
+Read 52190 items
+Read 52190 items
+Read 15285 items
+Read 15285 items
+Read 26986 items
+Read 26986 items
+Read 15754 items
+Read 15754 items
+Read 31938 items
+Read 31938 items
+Read 27162 items
+Read 27162 items
+Read 31947 items
+Read 31947 items
+Read 41125 items
+Read 41125 items
+Read 6610 items
+Read 6610 items
+Feature plot before QC
+Filtered cells with 3SD of mean nCount and nFeature, percent of mito
+Feature plot after QC
+Step 4: Sample processing, Normalization, Find variable features, Data scaling
+Performing log-normalization
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Calculating gene variances
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Calculating feature variances of standardized and clipped values
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Performing log-normalization
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Calculating gene variances
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Calculating feature variances of standardized and clipped values
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Performing log-normalization
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Calculating gene variances
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Calculating feature variances of standardized and clipped values
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Performing log-normalization
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Calculating gene variances
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Calculating feature variances of standardized and clipped values
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Performing log-normalization
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Calculating gene variances
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Calculating feature variances of standardized and clipped values
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Performing log-normalization
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Calculating gene variances
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Calculating feature variances of standardized and clipped values
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Performing log-normalization
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Calculating gene variances
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Calculating feature variances of standardized and clipped values
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Performing log-normalization
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Calculating gene variances
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Calculating feature variances of standardized and clipped values
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Performing log-normalization
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Calculating gene variances
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Calculating feature variances of standardized and clipped values
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Performing log-normalization
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Calculating gene variances
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Calculating feature variances of standardized and clipped values
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Performing log-normalization
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Calculating gene variances
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Calculating feature variances of standardized and clipped values
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Performing log-normalization
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Calculating gene variances
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Calculating feature variances of standardized and clipped values
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Performing log-normalization
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Calculating gene variances
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Calculating feature variances of standardized and clipped values
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Performing log-normalization
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Calculating gene variances
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Calculating feature variances of standardized and clipped values
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Step 5: Determine the ‘dimensionality’ of the dataset
+Step 6: Cell clustering
+Cell clustering using default settings: PCA, Louvain. CHANGE dims according to elbow plot !!!
+Computing nearest neighbor graph
+Computing SNN
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+Warning: The default method for RunUMAP has changed from calling Python UMAP via reticulate to the R-native UWOT using the cosine metric
+To use Python UMAP via reticulate, set umap.method to 'umap-learn' and metric to 'correlation'
+This message will be shown once per session
+10:35:51 UMAP embedding parameters a = 0.9922 b = 1.112
+10:35:51 Read 6857 rows and found 15 numeric columns
+10:35:51 Using Annoy for neighbor search, n_neighbors = 30
+10:35:51 Building Annoy index with metric = cosine, n_trees = 50
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+10:35:52 Writing NN index file to temp file /tmp/937095.tmpdir/RtmpZLuNij/filef5793a6f3192
+10:35:52 Searching Annoy index using 1 thread, search_k = 3000
+10:35:56 Annoy recall = 100%
+10:35:57 Commencing smooth kNN distance calibration using 1 thread
+10:35:59 Initializing from normalized Laplacian + noise
+10:36:00 Commencing optimization for 500 epochs, with 284018 positive edges
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+10:36:25 Optimization finished
+Computing nearest neighbor graph
+Computing SNN
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+10:36:33 UMAP embedding parameters a = 0.9922 b = 1.112
+10:36:33 Read 6413 rows and found 15 numeric columns
+10:36:33 Using Annoy for neighbor search, n_neighbors = 30
+10:36:33 Building Annoy index with metric = cosine, n_trees = 50
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+10:36:34 Writing NN index file to temp file /tmp/937095.tmpdir/RtmpZLuNij/filef579696adf01
+10:36:34 Searching Annoy index using 1 thread, search_k = 3000
+10:36:36 Annoy recall = 100%
+10:36:38 Commencing smooth kNN distance calibration using 1 thread
+10:36:41 Initializing from normalized Laplacian + noise
+10:36:41 Commencing optimization for 500 epochs, with 260868 positive edges
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+10:37:05 Optimization finished
+Computing nearest neighbor graph
+Computing SNN
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+10:37:13 UMAP embedding parameters a = 0.9922 b = 1.112
+10:37:13 Read 7299 rows and found 15 numeric columns
+10:37:13 Using Annoy for neighbor search, n_neighbors = 30
+10:37:13 Building Annoy index with metric = cosine, n_trees = 50
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+10:37:14 Writing NN index file to temp file /tmp/937095.tmpdir/RtmpZLuNij/filef5792063d529
+10:37:14 Searching Annoy index using 1 thread, search_k = 3000
+10:37:18 Annoy recall = 100%
+10:37:19 Commencing smooth kNN distance calibration using 1 thread
+10:37:22 Initializing from normalized Laplacian + noise
+10:37:23 Commencing optimization for 500 epochs, with 298788 positive edges
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+10:37:52 Optimization finished
+Computing nearest neighbor graph
+Computing SNN
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+10:38:00 UMAP embedding parameters a = 0.9922 b = 1.112
+10:38:00 Read 6470 rows and found 15 numeric columns
+10:38:00 Using Annoy for neighbor search, n_neighbors = 30
+10:38:00 Building Annoy index with metric = cosine, n_trees = 50
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+10:38:01 Writing NN index file to temp file /tmp/937095.tmpdir/RtmpZLuNij/filef5793dee0f14
+10:38:01 Searching Annoy index using 1 thread, search_k = 3000
+10:38:04 Annoy recall = 100%
+10:38:10 Commencing smooth kNN distance calibration using 1 thread
+10:38:12 Initializing from normalized Laplacian + noise
+10:38:13 Commencing optimization for 500 epochs, with 269086 positive edges
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+10:38:39 Optimization finished
+Computing nearest neighbor graph
+Computing SNN
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+10:38:46 UMAP embedding parameters a = 0.9922 b = 1.112
+10:38:46 Read 7686 rows and found 15 numeric columns
+10:38:46 Using Annoy for neighbor search, n_neighbors = 30
+10:38:46 Building Annoy index with metric = cosine, n_trees = 50
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+10:38:48 Writing NN index file to temp file /tmp/937095.tmpdir/RtmpZLuNij/filef5793762554b
+10:38:48 Searching Annoy index using 1 thread, search_k = 3000
+10:38:50 Annoy recall = 100%
+10:38:52 Commencing smooth kNN distance calibration using 1 thread
+10:38:54 Initializing from normalized Laplacian + noise
+10:38:55 Commencing optimization for 500 epochs, with 322408 positive edges
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+10:39:21 Optimization finished
+Computing nearest neighbor graph
+Computing SNN
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+10:39:50 UMAP embedding parameters a = 0.9922 b = 1.112
+10:39:50 Read 25643 rows and found 15 numeric columns
+10:39:50 Using Annoy for neighbor search, n_neighbors = 30
+10:39:50 Building Annoy index with metric = cosine, n_trees = 50
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+10:39:54 Writing NN index file to temp file /tmp/937095.tmpdir/RtmpZLuNij/filef57946105de0
+10:39:54 Searching Annoy index using 1 thread, search_k = 3000
+10:40:05 Annoy recall = 100%
+10:40:06 Commencing smooth kNN distance calibration using 1 thread
+10:40:10 Initializing from normalized Laplacian + noise
+10:40:11 Commencing optimization for 200 epochs, with 1104808 positive edges
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+10:40:47 Optimization finished
+Computing nearest neighbor graph
+Computing SNN
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+10:40:55 UMAP embedding parameters a = 0.9922 b = 1.112
+10:40:55 Read 6876 rows and found 15 numeric columns
+10:40:55 Using Annoy for neighbor search, n_neighbors = 30
+10:40:55 Building Annoy index with metric = cosine, n_trees = 50
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+10:40:56 Writing NN index file to temp file /tmp/937095.tmpdir/RtmpZLuNij/filef5791ed9185
+10:40:56 Searching Annoy index using 1 thread, search_k = 3000
+10:40:59 Annoy recall = 100%
+10:41:00 Commencing smooth kNN distance calibration using 1 thread
+10:41:02 Initializing from normalized Laplacian + noise
+10:41:02 Commencing optimization for 500 epochs, with 285972 positive edges
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+10:41:26 Optimization finished
+Computing nearest neighbor graph
+Computing SNN
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+10:41:40 UMAP embedding parameters a = 0.9922 b = 1.112
+10:41:40 Read 13921 rows and found 15 numeric columns
+10:41:40 Using Annoy for neighbor search, n_neighbors = 30
+10:41:40 Building Annoy index with metric = cosine, n_trees = 50
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+10:41:42 Writing NN index file to temp file /tmp/937095.tmpdir/RtmpZLuNij/filef579577e8900
+10:41:42 Searching Annoy index using 1 thread, search_k = 3000
+10:41:48 Annoy recall = 100%
+10:41:49 Commencing smooth kNN distance calibration using 1 thread
+10:41:52 Initializing from normalized Laplacian + noise
+10:41:53 Commencing optimization for 200 epochs, with 592608 positive edges
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+10:42:14 Optimization finished
+Computing nearest neighbor graph
+Computing SNN
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+10:42:20 UMAP embedding parameters a = 0.9922 b = 1.112
+10:42:20 Read 4093 rows and found 15 numeric columns
+10:42:20 Using Annoy for neighbor search, n_neighbors = 30
+10:42:20 Building Annoy index with metric = cosine, n_trees = 50
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+10:42:21 Writing NN index file to temp file /tmp/937095.tmpdir/RtmpZLuNij/filef579210055d0
+10:42:21 Searching Annoy index using 1 thread, search_k = 3000
+10:42:22 Annoy recall = 100%
+10:42:24 Commencing smooth kNN distance calibration using 1 thread
+10:42:26 Initializing from normalized Laplacian + noise
+10:42:27 Commencing optimization for 500 epochs, with 167996 positive edges
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+10:42:44 Optimization finished
+Computing nearest neighbor graph
+Computing SNN
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+10:43:04 UMAP embedding parameters a = 0.9922 b = 1.112
+10:43:04 Read 17951 rows and found 15 numeric columns
+10:43:04 Using Annoy for neighbor search, n_neighbors = 30
+10:43:04 Building Annoy index with metric = cosine, n_trees = 50
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+10:43:07 Writing NN index file to temp file /tmp/937095.tmpdir/RtmpZLuNij/filef5795960fbc5
+10:43:07 Searching Annoy index using 1 thread, search_k = 3000
+10:43:16 Annoy recall = 100%
+10:43:18 Commencing smooth kNN distance calibration using 1 thread
+10:43:21 Initializing from normalized Laplacian + noise
+10:43:23 Commencing optimization for 200 epochs, with 773264 positive edges
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+10:43:54 Optimization finished
+Computing nearest neighbor graph
+Computing SNN
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+10:44:13 UMAP embedding parameters a = 0.9922 b = 1.112
+10:44:13 Read 16816 rows and found 15 numeric columns
+10:44:13 Using Annoy for neighbor search, n_neighbors = 30
+10:44:13 Building Annoy index with metric = cosine, n_trees = 50
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+10:44:17 Writing NN index file to temp file /tmp/937095.tmpdir/RtmpZLuNij/filef5792654d239
+10:44:17 Searching Annoy index using 1 thread, search_k = 3000
+10:44:26 Annoy recall = 100%
+10:44:27 Commencing smooth kNN distance calibration using 1 thread
+10:44:31 Initializing from normalized Laplacian + noise
+10:44:32 Commencing optimization for 200 epochs, with 718308 positive edges
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+10:45:05 Optimization finished
+Computing nearest neighbor graph
+Computing SNN
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+10:45:35 UMAP embedding parameters a = 0.9922 b = 1.112
+10:45:35 Read 23494 rows and found 15 numeric columns
+10:45:35 Using Annoy for neighbor search, n_neighbors = 30
+10:45:35 Building Annoy index with metric = cosine, n_trees = 50
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+10:45:39 Writing NN index file to temp file /tmp/937095.tmpdir/RtmpZLuNij/filef5795e0c3000
+10:45:39 Searching Annoy index using 1 thread, search_k = 3000
+10:45:51 Annoy recall = 100%
+10:45:53 Commencing smooth kNN distance calibration using 1 thread
+10:45:57 Initializing from normalized Laplacian + noise
+10:45:59 Commencing optimization for 200 epochs, with 994588 positive edges
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+10:46:47 Optimization finished
+Computing nearest neighbor graph
+Computing SNN
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+10:47:05 UMAP embedding parameters a = 0.9922 b = 1.112
+10:47:05 Read 15002 rows and found 15 numeric columns
+10:47:05 Using Annoy for neighbor search, n_neighbors = 30
+10:47:05 Building Annoy index with metric = cosine, n_trees = 50
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+10:47:08 Writing NN index file to temp file /tmp/937095.tmpdir/RtmpZLuNij/filef579c762f32
+10:47:08 Searching Annoy index using 1 thread, search_k = 3000
+10:47:18 Annoy recall = 100%
+10:47:19 Commencing smooth kNN distance calibration using 1 thread
+10:47:22 Initializing from normalized Laplacian + noise
+10:47:23 Commencing optimization for 200 epochs, with 629460 positive edges
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+10:47:54 Optimization finished
+Computing nearest neighbor graph
+Computing SNN
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+10:48:01 UMAP embedding parameters a = 0.9922 b = 1.112
+10:48:01 Read 3855 rows and found 15 numeric columns
+10:48:01 Using Annoy for neighbor search, n_neighbors = 30
+10:48:01 Building Annoy index with metric = cosine, n_trees = 50
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+10:48:02 Writing NN index file to temp file /tmp/937095.tmpdir/RtmpZLuNij/filef579f98317a
+10:48:02 Searching Annoy index using 1 thread, search_k = 3000
+10:48:04 Annoy recall = 100%
+10:48:05 Commencing smooth kNN distance calibration using 1 thread
+10:48:08 Initializing from normalized Laplacian + noise
+10:48:08 Commencing optimization for 500 epochs, with 152738 positive edges
+0%   10   20   30   40   50   60   70   80   90   100%
+[----|----|----|----|----|----|----|----|----|----|
+**************************************************|
+10:48:27 Optimization finished
+Cell clustering using GLMPCA
+Cell clustering using Leiden
